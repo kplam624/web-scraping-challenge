@@ -7,12 +7,14 @@ from splinter import Browser
 from webdriver_manager.chrome import ChromeDriverManager
 
 # Start up manager and open Chrome
-executable_path = {'executable_path': ChromeDriverManager().install()}
-browser = Browser('chrome', **executable_path, headless=False)
+def init_browser():
+    executable_path = {'executable_path': ChromeDriverManager().install()}
+    browser = Browser('chrome', **executable_path, headless=False)
+#------------------------------------------------------------------------------------------------
 
 # Finding the latest article
 # Visit the webpage
-
+def scrape():
 url = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
 response = requests.get(url)
 soup = bs(response.text,"html")
@@ -44,6 +46,9 @@ figure = element.find_by_tag('a')
 featured_img_url = figure['href']
 #----------------------------------------------------------------------------------------------------
 
+# Searches for the table.
+# Visit the webpage
+
 url3 = "https://space-facts.com/mars/"
 table = pd.read_html(url3)
 df = table[0]
@@ -53,6 +58,9 @@ df.set_index("", inplace = True)
 html_table = df.to_html()
 
 #-----------------------------------------------------------------------------------------------------
+
+# Searches for the hemisphere images.
+# Visit the webpage
 
 url4 = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
 browser.visit(url4)
@@ -86,4 +94,7 @@ mars_dict = [
 ]
 mars_dict
 
+# Closes out the browser.
 browser.quit()
+
+return mars_dict
