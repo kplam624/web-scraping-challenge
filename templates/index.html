@@ -23,9 +23,17 @@
       <p>If want to learn more about the happenings on Mars. Click the button.</p>
       <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Lets learn about Mars!</a></p>
     </div>
+    <h2>Recent News</h2>
+    <h3>{{ mars.feature_title }}</h3>
+    <p>{{ mars.feature_description }}</p>
     <img src="{{ mars.featured_url }}" alt="Featured Mars">
+    
+    <table>
+      {{ clean_table }}
+    </table>
+    
     <h2>Mar's hemispheres look like this!</h2>
-    <img src="{{ mars.image1 }}" alt="mars hemisphere">
+    <img src="{{ mars.hemi1.image }}" alt="mars hemisphere">
     </div>
     
 </body>

@@ -56,8 +56,8 @@ def scrape():
     df.columns = ["","Mars"]
     df.set_index("", inplace = True)
 
-    # table = df.to_html("templates/index.html")
-    # clean_table = table.replace("\n","")
+    table = df.to_html()
+    clean_table = table.replace("\n","")
     #-----------------------------------------------------------------------------------------------------
 
     # Searches for the hemisphere images.
@@ -87,19 +87,26 @@ def scrape():
         except:
             print('done')
 
-    mars_dict = [
-        {'title':'Cerberus Hemisphere', "image1": mars[0]},
-        {'title':'Schiaparelli Hemisphere', "image2": mars[1]},
-        {'title':'Syrtis Major Hemisphere', "image3": mars[2]},
-        {'title':'Valles Marineris Hemisphere Hemisphere', "image4": mars[3]}
+    mars_list = [
+        {'title':'Cerberus Hemisphere', "image": mars[0]},
+        {'title':'Schiaparelli Hemisphere', "image": mars[1]},
+        {'title':'Syrtis Major Hemisphere', "image": mars[2]},
+        {'title':'Valles Marineris Hemisphere Hemisphere', "image": mars[3]}
     ]
-        {'featured_url':featured_img_url},
-        {'title':title,'description':description}
     
-    # m_dict = {}
-    # for i in len(mars_dict):
+    m_dict={
+        'featured_url':featured_img_url,
+        'feature_title':title,
+        'feature_description':description,
+        'table1': clean_table,
+        'hemi1': mars_list[0],
+        'hemi2': mars_list[1],
+        'hemi3': mars_list[2],
+        'hemi4': mars_list[3]
+        }
+
         
 
     # Closes out the browser.
     browser.quit()
-    return mars_dict 
+    return m_dict 

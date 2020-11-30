@@ -19,8 +19,7 @@ def scrape():
 
     mars_scrape = scrape_mars.scrape()
 
-    for i in range(len(mars_scrape)):
-        mongo.db.collection.update({}, mars_scrape[i], upsert = True)
+    mongo.db.collection.update({}, mars_scrape, upsert = True)
 
     return redirect("/")
 
