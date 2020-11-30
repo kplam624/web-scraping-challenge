@@ -1,5 +1,9 @@
 /* Style sheet for index.html */
 
+h3{
+    color: aqua;
+}
+
 .container{
     margin: 0;
     padding: 2%;
@@ -7,5 +11,5 @@
 
 .resize{
     width: 40%;
-    height: 40%
+    height: 40%;
 }
