@@ -9,92 +9,93 @@ from webdriver_manager.chrome import ChromeDriverManager
 # Start up manager and open Chrome
 def init_browser():
     executable_path = {'executable_path': ChromeDriverManager().install()}
-    browser = Browser('chrome', **executable_path, headless=False)
+    return Browser('chrome', **executable_path, headless=False)
 #------------------------------------------------------------------------------------------------
+
+def scrape():
+    browser = init_browser()
 
 # Finding the latest article
 # Visit the webpage
-def scrape():
-url = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
-response = requests.get(url)
-soup = bs(response.text,"html")
 
-browser.visit(url)
-html = browser.html
-soup = bs(html,'html')
+    url = "https://mars.nasa.gov/news/?page=0&per_page=40&order=publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
+    browser.visit(url)
+    time.sleep(1)
 
-title = soup.find_all('div', class_ ="content_title")[1].text
-description = soup.find('div', class_ ="article_teaser_body").text
-#-------------------------------------------------------------------------------------------------
+    html = browser.html
+    soup = bs(html,'html')
 
-# Searches for featured images.
-# Visit the webpage
+    title = soup.find_all('div', class_ ="content_title")[1].text
+    description = soup.find('div', class_ ="article_teaser_body").text
+    #-------------------------------------------------------------------------------------------------
 
-url2 = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
-response = requests.get(url2)
-soup = bs(response.text,"html")
+    # Searches for featured images.
+    # Visit the webpage
 
-browser.visit(url2)
-html = browser.html
-soup = bs(html,'html')
+    url2 = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
+    browser.visit(url2)
+    time.sleep(1)
 
-browser.find_by_tag('footer').click()
-time.sleep(2)
-browser.links.find_by_partial_text('more info').click()
-element = browser.find_by_tag('figure')
-figure = element.find_by_tag('a')
-featured_img_url = figure['href']
-#----------------------------------------------------------------------------------------------------
+    html = browser.html
+    soup = bs(html,'html')
 
-# Searches for the table.
-# Visit the webpage
+    browser.find_by_tag('footer').click()
+    time.sleep(1)
+    browser.links.find_by_partial_text('more info').click()
+    element = browser.find_by_tag('figure')
+    figure = element.find_by_tag('a')
+    featured_img_url = figure['href']
+    #----------------------------------------------------------------------------------------------------
 
-url3 = "https://space-facts.com/mars/"
-table = pd.read_html(url3)
-df = table[0]
-df.columns = ["","Mars"]
-df.set_index("", inplace = True)
+    # Searches for the table.
+    # Visit the webpage
 
-html_table = df.to_html()
+    url3 = "https://space-facts.com/mars/"
+    table = pd.read_html(url3)
+    df = table[0]
+    df.columns = ["","Mars"]
+    df.set_index("", inplace = True)
 
-#-----------------------------------------------------------------------------------------------------
+    df.to_html("index.html")
 
-# Searches for the hemisphere images.
-# Visit the webpage
+    #-----------------------------------------------------------------------------------------------------
 
-url4 = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
-browser.visit(url4)
-html = browser.html
-soup = bs(html,'html')
+    # Searches for the hemisphere images.
+    # Visit the webpage
 
-hemispheres = soup.find_all('div', class_ = 'description')
-hemilen = len(hemispheres)
-browser.find_by_tag("h3").click()
-mars = []
+    url4 = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    browser.visit(url4)
+    html = browser.html
+    soup = bs(html,'html')
 
-for x in range(1,hemilen+1):
-    wide = browser.find_by_id("wide-image")
-    img = wide.find_by_tag('img')
-    image = img[1]['src']
-    
-    mars.append(image)
-    time.sleep(2)
-    browser.back()
-    
-    try:
-        browser.find_by_tag("h3")[x].click()
-    except:
-        print('done')
+    hemispheres = soup.find_all('div', class_ = 'description')
+    hemilen = len(hemispheres)
+    browser.find_by_tag("h3").click()
+    mars = []
 
-mars_dict = [
-    {'title':'Cerberus Hemisphere', "image": mars[0]},
-    {'title':'Schiaparelli Hemisphere', "image": mars[1]},
-    {'title':'Syrtis Major Hemisphere', "image": mars[2]},
-    {'title':'Valles Marineris Hemisphere Hemisphere', "image": mars[3]}
-]
-mars_dict
+    for x in range(1,hemilen+1):
+        wide = browser.find_by_id("wide-image")
+        img = wide.find_by_tag('img')
+        image = img[1]['src']
+        
+        mars.append(image)
+        time.sleep(2)
+        browser.back()
+        
+        try:
+            browser.find_by_tag("h3")[x].click()
+        except:
+            print('done')
 
-# Closes out the browser.
-browser.quit()
+    mars_dict = [
+        {'title':'Cerberus Hemisphere', "image": mars[0]},
+        {'title':'Schiaparelli Hemisphere', "image": mars[1]},
+        {'title':'Syrtis Major Hemisphere', "image": mars[2]},
+        {'title':'Valles Marineris Hemisphere Hemisphere', "image": mars[3]}
+    ]
+    mars_dict
 
-return mars_dict
+    # Closes out the browser.
+    browser.quit()
+
+return mars_dict, 
