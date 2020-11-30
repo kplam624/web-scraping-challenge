@@ -57,7 +57,7 @@ def scrape():
     df.set_index("", inplace = True)
 
     table = df.to_html()
-    clean_table = table.replace("\n","")
+
     #-----------------------------------------------------------------------------------------------------
 
     # Searches for the hemisphere images.
@@ -98,7 +98,7 @@ def scrape():
         'featured_url':featured_img_url,
         'feature_title':title,
         'feature_description':description,
-        'table1': clean_table,
+        'table1': table,
         'hemi1': mars_list[0],
         'hemi2': mars_list[1],
         'hemi3': mars_list[2],

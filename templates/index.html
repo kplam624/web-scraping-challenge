@@ -23,18 +23,52 @@
       <p>If want to learn more about the happenings on Mars. Click the button.</p>
       <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Lets learn about Mars!</a></p>
     </div>
-    <h2>Recent News</h2>
-    <h3>{{ mars.feature_title }}</h3>
-    <p>{{ mars.feature_description }}</p>
-    <img src="{{ mars.featured_url }}" alt="Featured Mars">
-    
-    <table>
-      {{ clean_table }}
-    </table>
+    </div>
+
+    {{mars.table1}}
+    <table border="1" class="dataframe"> <thead> <tr style="text-align: right;"> <th></th> <th>Mars</th> </tr> <tr> <th></th> <th></th> </tr> </thead> <tbody> <tr> <th>Equatorial Diameter:</th> <td>6,792 km</td> </tr> <tr> <th>Polar Diameter:</th> <td>6,752 km</td> </tr> <tr> <th>Mass:</th> <td>6.39 × 10^23 kg (0.11 Earths)</td> </tr> <tr> <th>Moons:</th> <td>2 (Phobos &amp; Deimos)</td> </tr> <tr> <th>Orbit Distance:</th> <td>227,943,824 km (1.38 AU)</td> </tr> <tr> <th>Orbit Period:</th> <td>687 days (1.9 years)</td> </tr> <tr> <th>Surface Temperature:</th> <td>-87 to -5 °C</td> </tr> <tr> <th>First Record:</th> <td>2nd millennium BC</td> </tr> <tr> <th>Recorded By:</th> <td>Egyptian astronomers</td> </tr> </tbody> </table>
+
+  <div class="container">
+    <div class = "row">
+      <div class = "col-md-12">
+        <h2>Recent News</h2>
+        <h3>{{ mars.feature_title }}</h3>
+        <p>{{ mars.feature_description }}</p>
+      </div>
+    </div>
+
+    <div class = "row">
+      <div class="col-md-6">
+        <h3>Featured Image for today.</h3>
+        <img src="{{ mars.featured_url }}" alt="Featured Mars">
+      </div>
+    </div>
     
     <h2>Mar's hemispheres look like this!</h2>
-    <img src="{{ mars.hemi1.image }}" alt="mars hemisphere">
+    <div class="row">
+      <div class="col-md-6">
+        <h3>{{mars.hemi1.title}}</h3>
+        <img src="{{ mars.hemi1.image }}" alt="mars hemisphere">
+      </div>
+      <div class="col-md-6">
+        <h3>{{mars.hemi2.title}}</h3>
+        <img src="{{ mars.hemi2.image }}" alt="mars hemisphere">
+      </div>
     </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h3>{{mars.hemi3.title}}</h3>
+        <img src="{{ mars.hemi3.image }}" alt="mars hemisphere">
+      </div>
+
+      <div class="col-md-6">
+        <h3>{{mars.hemi4.title}}</h3>
+        <img src="{{ mars.hemi4.image }}" alt="mars hemisphere">
+      </div>
+
+    </div>
+  </div>
     
 </body>
 </html>
