@@ -56,8 +56,8 @@ def scrape():
     df.columns = ["","Mars"]
     df.set_index("", inplace = True)
 
-    df.to_html("index.html")
-
+    table = df.to_html()
+    clean_table = table.replace("\n","")
     #-----------------------------------------------------------------------------------------------------
 
     # Searches for the hemisphere images.
@@ -92,10 +92,13 @@ def scrape():
         {'title':'Schiaparelli Hemisphere', "image": mars[1]},
         {'title':'Syrtis Major Hemisphere', "image": mars[2]},
         {'title':'Valles Marineris Hemisphere Hemisphere', "image": mars[3]}
+        {'featured url':featured_img_url}
+        {'title':title,'description':description}
+        {'table':clean_table}
     ]
     mars_dict
 
     # Closes out the browser.
     browser.quit()
 
-return mars_dict, 
+return mars_dict 
