@@ -40,7 +40,7 @@ def scrape():
     soup = bs(html,'html')
 
     browser.find_by_tag('footer').click()
-    time.sleep(1)
+    time.sleep(2)
     browser.links.find_by_partial_text('more info').click()
     element = browser.find_by_tag('figure')
     figure = element.find_by_tag('a')
@@ -56,8 +56,8 @@ def scrape():
     df.columns = ["","Mars"]
     df.set_index("", inplace = True)
 
-    table = df.to_html()
-    clean_table = table.replace("\n","")
+    # table = df.to_html("templates/index.html")
+    # clean_table = table.replace("\n","")
     #-----------------------------------------------------------------------------------------------------
 
     # Searches for the hemisphere images.
@@ -88,17 +88,18 @@ def scrape():
             print('done')
 
     mars_dict = [
-        {'title':'Cerberus Hemisphere', "image": mars[0]},
-        {'title':'Schiaparelli Hemisphere', "image": mars[1]},
-        {'title':'Syrtis Major Hemisphere', "image": mars[2]},
-        {'title':'Valles Marineris Hemisphere Hemisphere', "image": mars[3]}
-        {'featured url':featured_img_url}
-        {'title':title,'description':description}
-        {'table':clean_table}
+        {'title':'Cerberus Hemisphere', "image1": mars[0]},
+        {'title':'Schiaparelli Hemisphere', "image2": mars[1]},
+        {'title':'Syrtis Major Hemisphere', "image3": mars[2]},
+        {'title':'Valles Marineris Hemisphere Hemisphere', "image4": mars[3]}
     ]
-    mars_dict
+        {'featured_url':featured_img_url},
+        {'title':title,'description':description}
+    
+    # m_dict = {}
+    # for i in len(mars_dict):
+        
 
     # Closes out the browser.
     browser.quit()
-
-return mars_dict 
+    return mars_dict 
