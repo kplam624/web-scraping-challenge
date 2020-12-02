@@ -1,19 +1,21 @@
 /* Style sheet for index.html */
 
+/* Style for tags */
 h2{
-    color: blue;
-    background-color: red;
+    color: rgb(60, 60, 131);
 }
 
 h3{
     color: aqua;
 }
 
+/* Style for the ids */
 #feature_image{
     width: 80%;
     height: 80%;
 }
 
+/* Style for the class. */
 .container{
     margin: 0;
     padding: 1%;
