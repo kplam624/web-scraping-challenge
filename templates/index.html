@@ -33,25 +33,41 @@
     <div class = "row">
       <div class = "col-md-12">
         <h2>Recent News</h2>
+        {% if mars.feature_title == null %}
+        <h3>Elon Musk is ‘highly confident’ SpaceX will land humans on Mars by 2026</h3>
+        <p>“If we get lucky, maybe four years,” Musk said</p>
+        {% else %}
         <h3>{{ mars.feature_title }}</h3>
         <p>{{ mars.feature_description }}</p>
+        {% endif %}
       </div>
     </div>
 
     <div class = "row">
       <div class="col-md-6">
+        {% if mars.featured_url == null %}
+        <h3>Featured Image for today.</h3>
+        <img src="https://media.gq.com/photos/57eac35d9228bbed3f6f4ee5/16:9/w_2560%2Cc_limit/elon-musk-is-a-rocket.jpg" alt="Featured Mars" id="feature_image">
+        {% else %}
         <h3>Featured Image for today.</h3>
         <img src="{{ mars.featured_url }}" alt="Featured Mars" id="feature_image">
+        {% endif %}
       </div>
       <div class="col-md-6">
+        {% if mars.table1 == null %}
+        {% else %}
         <h3>Mar's Facts</h3>
         {{ mars.table1|safe }}
+        {% endif %}
       </div>
     </div>
 
     {% if mars.hemi1 == null %}
+    <h2>Trending Mars</h2>
+    {% else %}
     <h2>Mar's hemispheres look like this!</h2>
-    
+    {% endif %}
+
     <div class="row">
       <div class="col-md-6">
         {% if mars.hemi1 == null %}
