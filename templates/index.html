@@ -13,22 +13,32 @@
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   
     <!-- Our own CSS stylesheet -->
+    <!-- Due to the code with templates. Created a directory css instead of styles. -->
   <link rel="stylesheet" href="../static/css/style.css">
 
 
 </head>
 
+<!-- The code contains multiple if statements. This is due to the mongodb library being empty. -->
+<!-- As such to fill empty space created a faux page. -->
 <body>
+  <!-- The button at the top of the page. -->
   <div class="container-fluid">
     <div class="jumbotron text-center">
-      <h1>Welcome to Mars, kinda</h1>
-      <p>If want to learn more about the happenings about Mars. Click the button.</p>
+      <!-- To change the button depending on the status of mongodb. -->
+      {% if mars.feature_title == null %}
+      <h1>Welcome to the Mars fanpage.</h1>
+      <p>If you are here for the planet Mars. Click the button.</p>
+      
+      {% else %}
+      <h1>Welcome to Mars</h1>
+      <p>If want to see if there is anything new. Click the button.</p>
+      {% endif %}
       <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Lets learn about Mars!</a></p>
     </div>
-    </div>
+  </div>
 
-    <!-- <table border="1" class="dataframe"> <thead> <tr style="text-align: right;"> <th></th> <th>Mars</th> </tr> <tr> <th></th> <th></th> </tr> </thead> <tbody> <tr> <th>Equatorial Diameter:</th> <td>6,792 km</td> </tr> <tr> <th>Polar Diameter:</th> <td>6,752 km</td> </tr> <tr> <th>Mass:</th> <td>6.39 × 10^23 kg (0.11 Earths)</td> </tr> <tr> <th>Moons:</th> <td>2 (Phobos &amp; Deimos)</td> </tr> <tr> <th>Orbit Distance:</th> <td>227,943,824 km (1.38 AU)</td> </tr> <tr> <th>Orbit Period:</th> <td>687 days (1.9 years)</td> </tr> <tr> <th>Surface Temperature:</th> <td>-87 to -5 °C</td> </tr> <tr> <th>First Record:</th> <td>2nd millennium BC</td> </tr> <tr> <th>Recorded By:</th> <td>Egyptian astronomers</td> </tr> </tbody> </table> -->
-
+  <!-- The featured title and description "Recent news." -->
   <div class="container">
     <div class = "row">
       <div class = "col-md-12">
@@ -37,12 +47,14 @@
         <h3>Elon Musk is ‘highly confident’ SpaceX will land humans on Mars by 2026</h3>
         <p>“If we get lucky, maybe four years,” Musk said</p>
         {% else %}
+        
         <h3>{{ mars.feature_title }}</h3>
         <p>{{ mars.feature_description }}</p>
         {% endif %}
       </div>
     </div>
 
+    <!-- The first row. Featured image and table. -->
     <div class = "row">
       <div class="col-md-6">
         {% if mars.featured_url == null %}
@@ -53,6 +65,8 @@
         <img src="{{ mars.featured_url }}" alt="Featured Mars" id="feature_image">
         {% endif %}
       </div>
+      
+      <!-- The table for mars facts -->
       <div class="col-md-6">
         {% if mars.table1 == null %}
         {% else %}
@@ -62,12 +76,15 @@
       </div>
     </div>
 
+    <!-- Beginning of the next row. -->
     {% if mars.hemi1 == null %}
     <h2>Trending Mars</h2>
     {% else %}
     <h2>Mar's hemispheres look like this!</h2>
     {% endif %}
 
+    <!-- The next row that will contain the hemispheres of mars. -->
+    <!-- The first hemisphere, Cerberus Hemisphere -->
     <div class="row">
       <div class="col-md-6">
         {% if mars.hemi1 == null %}
@@ -78,9 +95,11 @@
         <img src="{{ mars.hemi1.image }}" alt="mars hemisphere"class="resize">
         {% endif %}
       </div>
+      
+      <!-- The second hemisphere, Schiaparelli Hemisphere -->
       <div class="col-md-6">
         {% if mars.hemi2 == null %}
-        <h3>Mars(Aeres) God of War!</h3>
+        <h3>Mars(Aeres)</h3>
         <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/0_Statue_de_Mars_%28Pyrrhus%29_-_Musei_Capitolini_-_MC0058_%282%29.JPG" alt="mars hemisphere"class="resize">
         {% else %}
         <h3>{{mars.hemi2.title}}</h3>
@@ -89,6 +108,8 @@
       </div>
     </div>
 
+    <!-- The next row of hemispheres. -->
+    <!-- The third hemisphere, Syrtis Major Hemisphere -->
     <div class="row">
       <div class="col-md-6">
         {% if mars.hemi3 == null %}
@@ -100,6 +121,7 @@
         {% endif %}
       </div>
 
+      <!-- The fourth hemisphere, Valles Marineris Hemisphere Hemisphere -->
       <div class="col-md-6">
         {% if mars.hemi4 == null %}
         <h3>Veronica Mars</h3>
