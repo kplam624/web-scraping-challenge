@@ -13,7 +13,8 @@
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   
     <!-- Our own CSS stylesheet -->
-  <link rel="stylesheet" href="../static/styles/style.css">
+  <link rel="stylesheet" href="../static/css/style.css">
+
 
 </head>
 
@@ -26,8 +27,7 @@
     </div>
     </div>
 
-    {{mars.table1}}
-    <table border="1" class="dataframe"> <thead> <tr style="text-align: right;"> <th></th> <th>Mars</th> </tr> <tr> <th></th> <th></th> </tr> </thead> <tbody> <tr> <th>Equatorial Diameter:</th> <td>6,792 km</td> </tr> <tr> <th>Polar Diameter:</th> <td>6,752 km</td> </tr> <tr> <th>Mass:</th> <td>6.39 × 10^23 kg (0.11 Earths)</td> </tr> <tr> <th>Moons:</th> <td>2 (Phobos &amp; Deimos)</td> </tr> <tr> <th>Orbit Distance:</th> <td>227,943,824 km (1.38 AU)</td> </tr> <tr> <th>Orbit Period:</th> <td>687 days (1.9 years)</td> </tr> <tr> <th>Surface Temperature:</th> <td>-87 to -5 °C</td> </tr> <tr> <th>First Record:</th> <td>2nd millennium BC</td> </tr> <tr> <th>Recorded By:</th> <td>Egyptian astronomers</td> </tr> </tbody> </table>
+    <!-- <table border="1" class="dataframe"> <thead> <tr style="text-align: right;"> <th></th> <th>Mars</th> </tr> <tr> <th></th> <th></th> </tr> </thead> <tbody> <tr> <th>Equatorial Diameter:</th> <td>6,792 km</td> </tr> <tr> <th>Polar Diameter:</th> <td>6,752 km</td> </tr> <tr> <th>Mass:</th> <td>6.39 × 10^23 kg (0.11 Earths)</td> </tr> <tr> <th>Moons:</th> <td>2 (Phobos &amp; Deimos)</td> </tr> <tr> <th>Orbit Distance:</th> <td>227,943,824 km (1.38 AU)</td> </tr> <tr> <th>Orbit Period:</th> <td>687 days (1.9 years)</td> </tr> <tr> <th>Surface Temperature:</th> <td>-87 to -5 °C</td> </tr> <tr> <th>First Record:</th> <td>2nd millennium BC</td> </tr> <tr> <th>Recorded By:</th> <td>Egyptian astronomers</td> </tr> </tbody> </table> -->
 
   <div class="container">
     <div class = "row">
@@ -43,29 +43,55 @@
         <h3>Featured Image for today.</h3>
         <img src="{{ mars.featured_url }}" alt="Featured Mars" id="feature_image">
       </div>
+      <div class="col-md-6">
+        <h3>Mar's Facts</h3>
+        {{ mars.table1|safe }}
+      </div>
     </div>
-    
+
+    {% if mars.hemi1 == null %}
     <h2>Mar's hemispheres look like this!</h2>
+    
     <div class="row">
       <div class="col-md-6">
+        {% if mars.hemi1 == null %}
+        <h3>Sailor Mars</h3>
+        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d397d35c-c842-4776-9d23-5e40febe714b/de1vv44-2436f0aa-dbdf-4166-85a7-5f7da1f60836.png/v1/fill/w_1600,h_3045,strp/sickly_sailor_mars__face_mask_akuryo_taisan__by_glee_chan_de1vv44-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0zMDQ1IiwicGF0aCI6IlwvZlwvZDM5N2QzNWMtYzg0Mi00Nzc2LTlkMjMtNWU0MGZlYmU3MTRiXC9kZTF2djQ0LTI0MzZmMGFhLWRiZGYtNDE2Ni04NWE3LTVmN2RhMWY2MDgzNi5wbmciLCJ3aWR0aCI6Ijw9MTYwMCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.9kmJu_F2lKQ8KPVkwPUQ0mKmETi-LKHbFkkch-SKgd0" alt="mars hemisphere"class="resize">
+        {% else %}
         <h3>{{mars.hemi1.title}}</h3>
         <img src="{{ mars.hemi1.image }}" alt="mars hemisphere"class="resize">
+        {% endif %}
       </div>
       <div class="col-md-6">
+        {% if mars.hemi2 == null %}
+        <h3>Mars(Aeres) God of War!</h3>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/0_Statue_de_Mars_%28Pyrrhus%29_-_Musei_Capitolini_-_MC0058_%282%29.JPG" alt="mars hemisphere"class="resize">
+        {% else %}
         <h3>{{mars.hemi2.title}}</h3>
         <img src="{{ mars.hemi2.image }}" alt="mars hemisphere"class="resize">
+        {% endif %}
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-6">
+        {% if mars.hemi3 == null %}
+        <h3>Bruno Mars</h3>
+        <img src="https://www.washingtonian.com/wp-content/uploads/2017/12/WW.bruno_.jpg" alt="mars hemisphere"class="resize">
+        {% else %}
         <h3>{{mars.hemi3.title}}</h3>
         <img src="{{ mars.hemi3.image }}" alt="mars hemisphere"class="resize">
+        {% endif %}
       </div>
 
       <div class="col-md-6">
+        {% if mars.hemi4 == null %}
+        <h3>Veronica Mars</h3>
+        <img src="https://img1.looper.com/img/gallery/veronica-mars-season-5-release-date-cast-and-plot/intro-1567603353.jpg" alt="mars hemisphere"class="resize">
+        {% else %}
         <h3>{{mars.hemi4.title}}</h3>
         <img src="{{ mars.hemi4.image }}" alt="mars hemisphere"class="resize">
+        {% endif %}
       </div>
 
     </div>
